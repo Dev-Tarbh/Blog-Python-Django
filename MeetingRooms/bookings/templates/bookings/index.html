@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog de Cocina</title>
+</head>
+<body>
+    <h1>Recetas</h1>
+    <ul>
+        {% for receta in recetas %}
+            <li>{{ receta.nombre }} - {{ receta.descripcion }}</li>
+        {% endfor %}
+    </ul>
+
+    <h1>Recetas Saladas</h1>
+    <ul>
+        {% for salada in saladas %}
+            <li>{{ salada.nombre }} - {{ salada.descripcion }} - Precio: {{ salada.precio }}</li>
+        {% endfor %}
+    </ul>
+
+    <h1>Recetas Dulces</h1>
+    <ul>
+        {% for dulce in dulces %}
+        <li>{{ dulce.nombre }} - {{ dulce.descripcion }} - Precio: {{ dulce.precio }}</li>
+        {% endfor %}
+    </ul>
+    <form action="{% url 'buscar' %}" method="GET">
+        <input type="text" name="query" placeholder="Buscar...">
+        <button type="submit">Buscar</button>
+    </form>
+</body>
+</html>
