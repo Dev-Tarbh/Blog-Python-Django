@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resultados de la búsqueda</title>
+    {% load static %}
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/styles.css' %}"
+    />
+  </head>
+  <body class="cocina">
+    <div class="recetas">
+      <nav class="navbar navbar-expand-lg">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto barra">
+            <li class="nav-item active link">
+              <a class="nav-link" href="#">Recetas</a>
+            </li>
+            <li class="nav-item link">
+              <a class="nav-link" href="#">Recetas Saladas</a>
+            </li>
+            <li class="nav-item link">
+              <a class="nav-link" href="#">Recetas Dulces</a>
+            </li>
+          </ul>
+          <div>
+            <form
+              class="buscar"
+              class="form-inline my-2 my-lg-0"
+              action="{% url 'buscar' %}"
+              method="GET"
+            >
+              <input
+                class="form-control mr-sm-2"
+                type="search"
+                placeholder="Buscar..."
+                aria-label="Search"
+                name="query"
+              />
+              <button
+                class="btn btn-outline-success my-2 my-sm-0"
+                type="submit"
+              >
+                Buscar
+              </button>
+            </form>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <h1>Resultados de la búsqueda para "{{ query }}"</h1>
+    <ul>
+      {% for receta in resultados_recetas %}
+      <li>{{ receta.nombre }}</li>
+      {% endfor %}
+    </ul>
+    <ul>
+      {% for receta in resultados_saladas %}
+      <li>{{ receta.nombre }}</li>
+      {% endfor %}
+    </ul>
+    <ul>
+      {% for receta in resultados_dulces %}
+      <li>{{ receta.nombre }}</li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>

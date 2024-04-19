@@ -1,35 +1,75 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Blog de Cocina</title>
-</head>
-<body>
-    <h1>Recetas</h1>
-    <ul>
-        {% for receta in recetas %}
-            <li>{{ receta.nombre }} - {{ receta.descripcion }}</li>
-        {% endfor %}
-    </ul>
+    {% load static %}
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/styles.css' %}"
+    />
+  </head>
+  <body class="cocina">
+    <main>
+      <div class="recetas">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary nav-blog" >
+          <div class="container-fluid">
+            <a class="navbar-brand inicio" href="#">Inicio</a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#"
+                    >Recetas</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Recetas Saladas</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Recetas Dulces</a>
+                </li>
+              </ul>
+              <form class="buscar form-inline my-2 my-lg-0" action="{% url 'buscar' %}" method="GET">
+                <input type="text" name="query" class="form-control me-2" placeholder="Buscar" aria-label="Buscar">
+                <button class="btn btn-outline-success" type="submit">Buscar</button>
+            </form>            
+            </div>
+          </div>
+        </nav>
+      </div>
 
-    <h1>Recetas Saladas</h1>
-    <ul>
-        {% for salada in saladas %}
-            <li>{{ salada.nombre }} - {{ salada.descripcion }} - Precio: {{ salada.precio }}</li>
-        {% endfor %}
-    </ul>
-
-    <h1>Recetas Dulces</h1>
-    <ul>
-        {% for dulce in dulces %}
-        <li>{{ dulce.nombre }} - {{ dulce.descripcion }} - Precio: {{ dulce.precio }}</li>
-        {% endfor %}
-    </ul>
-    <form action="{% url 'buscar' %}" method="GET">
-        <input type="text" name="query" placeholder="Buscar...">
-        <button type="submit">Buscar</button>
-    </form>
-</body>
+      <div>
+        <h1 class="blog">Blog de Cocina</h1>
+        <ul>
+          {% for receta in recetas %}
+          <li>{{ receta.nombre }} - {{ receta.descripcion }}</li>
+          {% endfor %}
+        </ul>
+        <form action="{% url 'crear_receta' %}" method="POST">
+          {% csrf_token %} {{ recetas_form.as_p }}
+          <button type="submit" class="btn boton">Añadir Receta</button>
+        </form>
+      </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
 </html>

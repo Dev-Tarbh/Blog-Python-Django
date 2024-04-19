@@ -2,11 +2,11 @@
 from django.contrib import admin
 from django.urls import path
 from bookings import views
-from django.http import HttpResponse
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
-    path('busqueda.html', views.busqueda, name='buscar')
+    path('busqueda.html', views.buscar, name='buscar'),
+    path('crear_receta/', views.crear_receta, name='crear_receta')
 ]
