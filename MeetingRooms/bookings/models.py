@@ -1,14 +1,14 @@
 from django.db import models
 
 class Recetas(models.Model):
-    RECETA = 0
-    SALADA = 1
-    DULCE = 2
+    RECETA = 'recetas'
+    SALADA = 'saladas'
+    DULCE = 'dulces'
 
     CATEGORIAS = [
-        (RECETA, 'Receta'),
-        (SALADA, 'Receta Salada'),
-        (DULCE, 'Receta Dulce'),
+        (RECETA, 'recetas'),
+        (SALADA, 'saladas'),
+        (DULCE, 'dulces'),
     ]
 
     nombre = models.CharField(max_length=100)

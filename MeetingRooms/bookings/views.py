@@ -40,15 +40,28 @@ def crear_receta(request):
     if request.method == 'POST':
         form = RecetasForm(request.POST)
         if form.is_valid():
-            form.save()
+            nombre = form.cleaned_data['nombre']
+            descripcion = form.cleaned_data['descripcion']
+            categoria_id = form.cleaned_data['categoria']
+            if categoria_id == '0':
+               
+                pass
+            elif categoria_id == '1':
+               
+                pass
+            elif categoria_id == '2':
+            
+                pass
+
             messages.success(request, '¡La receta se ha guardado correctamente!')
             return redirect('index')
         else:
-            print(form.errors)  # Imprimir los errores del formulario en la consola
             messages.error(request, '¡Por favor corrija los errores del formulario!')
     else:
         form = RecetasForm()
     return render(request, 'bookings/crear_receta.html', {'form': form})
+            
+            
 
 def crear_receta_salada(request):
     if request.method == 'POST':
@@ -81,9 +94,7 @@ class RecetasForm(forms.ModelForm):
         self.fields['categoria'] = forms.ChoiceField(label='Categoría', choices=self.get_categorias_choices())
 
     def get_categorias_choices(self):
-     categorias = Recetas.objects.values_list('categoria', flat=True).distinct()
-     return [(str(categoria), str(categoria).capitalize()) for categoria in categorias]
-
+        return Recetas.CATEGORIAS
 
     nombre = forms.CharField(label='Nombre', max_length=100)
     descripcion = forms.CharField(label='Descripción', widget=forms.Textarea)
@@ -91,6 +102,13 @@ class RecetasForm(forms.ModelForm):
     class Meta:
         model = Recetas
         fields = ['nombre', 'descripcion', 'categoria']
+
+
+def index(request):
+    recetas = Recetas.objects.all()
+    saladas = Saladas.objects.all()
+    dulces = Dulces.objects.all()
+    return render(request, 'bookings/index.html', {'recetas': recetas, 'saladas': saladas, 'dulces': dulces})
 
 def editar_receta(request, receta_id):
     receta = get_object_or_404(Recetas, pk=receta_id)
