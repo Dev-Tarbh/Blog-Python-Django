@@ -7,16 +7,19 @@ class RecetasForm(forms.ModelForm):
         self.fields['categoria'].choices = self.get_categorias_choices()
 
     def get_categorias_choices(self):
-        categorias = Recetas.objects.values_list('categoria', flat=True).distinct()
-        return [(categoria, categoria.capitalize()) for categoria in categorias]
+        return Recetas.CATEGORIAS
 
     nombre = forms.CharField(label='Nombre', max_length=100)
     descripcion = forms.CharField(label='Descripción', widget=forms.Textarea)
-    categoria = forms.CharField(label='Categoría', max_length=100)  
 
     class Meta:
         model = Recetas
         fields = ['nombre', 'descripcion', 'categoria']
+
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['imagen'].widget = forms.FileInput(attrs={'accept': 'image/*'})
 
 class SaladasForm(forms.ModelForm):
     class Meta:

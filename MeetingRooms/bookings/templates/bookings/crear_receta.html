@@ -17,7 +17,11 @@
   </head>
   <body class="blog">
     <h1>Añadir Receta</h1>
-    <form action="{% url 'crear_receta' %}" method="POST">
+    <form
+      action="{% url 'crear_receta' %}"
+      method="POST"
+      enctype="multipart/form-data"
+    >
       {% csrf_token %}
       <div>
         <label for="nombre">Nombre:</label>
@@ -29,7 +33,15 @@
       </div>
       <div>
         <label for="categoria">Categoría:</label>
-        <input type="text" id="categoria" name="categoria" required />
+        <select id="categoria" name="categoria" required>
+          <option value="0">Receta</option>
+          <option value="1">Receta Salada</option>
+          <option value="2">Receta Dulce</option>
+        </select>
+      </div>
+      <div>
+        <label for="imagen">Imagen:</label>
+        <input type="file" id="imagen" name="imagen"  />
       </div>
       <button type="submit" class="boton">Guardar Receta</button>
     </form>

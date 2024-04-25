@@ -20,7 +20,9 @@
       <div class="recetas">
         <nav class="navbar navbar-expand-lg bg-body-tertiary nav-blog" >
           <div class="container-fluid">
-            <a class="navbar-brand inicio" href="#">Inicio</a>
+            <a href="#">
+            <img class="hat" src="https://banner2.cleanpng.com/20240115/whv/transparent-doodle-style-chef-hat-chefs-hat-fluffy-chefs-hat-white-chefs-hat-with-fluffy-brim-on-black-1710922601156.webp" alt="Chef HaT">
+          </a>
             <button
               class="navbar-toggler"
               type="button"
@@ -35,16 +37,21 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#"
+                  <a class="nav-link active link" aria-current="page" href="#"
                     >Recetas</a
                   >
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Recetas Saladas</a>
+                  <a class="nav-link link" href="#">Recetas Saladas</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Recetas Dulces</a>
+                  <a class="nav-link link" href="#">Recetas Dulces</a>
                 </li>
+                
+                <form action="{% url 'login' %}" method="get">
+                  <button type="submit">Login</button>
+              </form>
+              
               </ul>
               <form class="buscar form-inline my-2 my-lg-0" action="{% url 'buscar' %}" method="GET">
                 <input type="text" name="query" class="form-control me-2" placeholder="Buscar" aria-label="Buscar">
@@ -60,6 +67,11 @@
         <ul>
           {% for receta in recetas %}
           <li>{{ receta.nombre }} - {{ receta.descripcion }}</li>
+          <a href="{% url 'editar_receta' receta.id %}" class="btn boton">Editar</a>
+  
+     <form action="{% url 'borrar_receta' receta.id %}" method="post">
+    {% csrf_token %}
+    <input type="submit" class="btn boton" value="Borrar">
           {% endfor %}
         </ul>
         <form action="{% url 'crear_receta' %}" method="POST">
