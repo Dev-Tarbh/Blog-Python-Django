@@ -52,13 +52,10 @@ def crear_receta(request):
             elif categoria_id == '2':
             
                 pass
-
-            messages.success(request, '¡La receta se ha guardado correctamente!')
             return redirect('index')
+           
         else:
-            messages.error(request, '¡Por favor corrija los errores del formulario!')
-    else:
-        form = RecetasForm()
+           form = RecetasForm()
     return render(request, 'bookings/crear_receta.html', {'form': form})
             
             
@@ -101,7 +98,7 @@ class RecetasForm(forms.ModelForm):
 
     class Meta:
         model = Recetas
-        fields = ['nombre', 'descripcion', 'categoria']
+        fields = ['nombre', 'descripcion', 'categoria', 'imagen']
 
 
 def index(request):

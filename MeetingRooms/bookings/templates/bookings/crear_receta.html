@@ -40,8 +40,11 @@
         </select>
       </div>
       <div>
+        {% if receta.imagen %}
+        <img src="{{ receta.imagen.url }}" alt="Imagen de la receta" />
+        {% endif %}
         <label for="imagen">Imagen:</label>
-        <input type="file" id="imagen" name="imagen"  />
+        <input type="file" id="imagen" name="imagen" required />
       </div>
       <button type="submit" class="boton">Guardar Receta</button>
     </form>
