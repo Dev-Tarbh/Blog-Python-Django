@@ -15,19 +15,18 @@
       href="{% static 'css/styles.css' %}"
     />
   </head>
-  <body class="cocina">
+  <body class="blog-personajes">
     <div class="recetas">
       <nav class="navbar navbar-expand-lg">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto barra">
             <li class="nav-item active link">
-              <a class="nav-link" href="#">Recetas</a>
-            </li>
-            <li class="nav-item link">
-              <a class="nav-link" href="#">Recetas Saladas</a>
-            </li>
-            <li class="nav-item link">
-              <a class="nav-link" href="#">Recetas Dulces</a>
+              <a
+                class="nav-link active link"
+                aria-current="page"
+                href="{% url 'index' %}"
+                >Inicio</a
+              >
             </li>
           </ul>
           <div>
@@ -57,18 +56,8 @@
     </div>
     <h1>Resultados de la búsqueda para "{{ query }}"</h1>
     <ul>
-      {% for receta in resultados_recetas %}
-      <li>{{ receta.nombre }}</li>
-      {% endfor %}
-    </ul>
-    <ul>
-      {% for receta in resultados_saladas %}
-      <li>{{ receta.nombre }}</li>
-      {% endfor %}
-    </ul>
-    <ul>
-      {% for receta in resultados_dulces %}
-      <li>{{ receta.nombre }}</li>
+      {% for personaje in resultados_personajes %}
+      <li>{{ personaje.nombre }}</li>
       {% endfor %}
     </ul>
   </body>

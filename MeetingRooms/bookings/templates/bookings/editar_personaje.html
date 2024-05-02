@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crear Personaje</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% load static %}
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/styles.css' %}"
+    />
+  </head>
+</head>
+<body class="blog-personajes">
+  <main>
+    <div class="recetas">
+      <nav class="navbar navbar-expand-lg bg-body-tertiary nav-blog">
+        <div class="container-fluid">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active link" aria-current="page" href="{% url 'index' %}"
+                  >inicio</a
+                >
+              </li>
+            </ul>
+            <form
+              class="buscar form-inline my-2 my-lg-0"
+              action="{% url 'buscar' %}"
+              method="GET"
+            >
+              <input
+                type="text"
+                name="query"
+                class="form-control me-2"
+                placeholder="Buscar"
+                aria-label="Buscar"
+              />
+              <button class="btn btn-outline-success" type="submit">
+                Buscar
+              </button>
+            </form>
+            <form action="{% url 'login' %}" method="get">
+              <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <h2 class="editar">Editar</h2>
+    <div class="editar_personaje">
+    <form method="post" class="custom-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn editar">Guardar</button>
+    </form>  
+  </div>  
+</body>
+</html>

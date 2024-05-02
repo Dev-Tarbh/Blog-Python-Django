@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blog de Cocina</title>
+    <title>Blog de Personajes</title>
     {% load static %}
     <link
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -15,14 +15,11 @@
       href="{% static 'css/styles.css' %}"
     />
   </head>
-  <body class="cocina">
+  <body class="blog-personajes">
     <main>
       <div class="recetas">
-        <nav class="navbar navbar-expand-lg bg-body-tertiary nav-blog" >
+        <nav class="navbar navbar-expand-lg bg-body-tertiary nav-blog">
           <div class="container-fluid">
-            <a href="#">
-            <img class="hat" src="https://banner2.cleanpng.com/20240115/whv/transparent-doodle-style-chef-hat-chefs-hat-fluffy-chefs-hat-white-chefs-hat-with-fluffy-brim-on-black-1710922601156.webp" alt="Chef HaT">
-          </a>
             <button
               class="navbar-toggler"
               type="button"
@@ -37,48 +34,66 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                  <a class="nav-link active link" aria-current="page" href="#"
-                    >Recetas</a
+                  <a
+                    class="nav-link active link"
+                    aria-current="page"
+                    href="{% url 'index' %}"
+                    >Inicio</a
                   >
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link link" href="#">Recetas Saladas</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link link" href="#">Recetas Dulces</a>
-                </li>
-                
-                <form action="{% url 'login' %}" method="get">
-                  <button type="submit">Login</button>
-              </form>
-              
               </ul>
-              <form class="buscar form-inline my-2 my-lg-0" action="{% url 'buscar' %}" method="GET">
-                <input type="text" name="query" class="form-control me-2" placeholder="Buscar" aria-label="Buscar">
-                <button class="btn btn-outline-success" type="submit">Buscar</button>
-            </form>            
+
+              <form
+                class="buscar form-inline my-2 my-lg-0"
+                action="{% url 'buscar' %}"
+                method="GET"
+              >
+                <input
+                  type="text"
+                  name="query"
+                  class="form-control me-2"
+                  placeholder="Buscar"
+                  aria-label="Buscar"
+                />
+                <button class="btn btn-outline-success" type="submit">
+                  Buscar
+                </button>
+              </form>
+              {% if user.is_authenticated %}
+              <p>
+               <a href="">{{ user.username }}</a>  <a href="{% url 'logout' %}">Logout</a>
+              </p>
+              {% else %}
+              <p><a href="{% url 'login' %}">Login</a></p>
+              {% endif %}
             </div>
           </div>
         </nav>
       </div>
+      <div>
+        <h1 class="blog">Blog de Personajes</h1>
+      </div>
 
       <div>
-        <h1 class="blog">Blog de Cocina</h1>
+        <h2>Personajes</h2>
         <ul>
-          {% for receta in recetas %}
-          <li>{{ receta.nombre }} - {{ receta.descripcion }}</li>
-          <a href="{% url 'editar_receta' receta.id %}" class="btn boton">Editar</a>
-  
-     <form action="{% url 'borrar_receta' receta.id %}" method="post">
-    {% csrf_token %}
-    <input type="submit" class="btn boton" value="Borrar">
+          {% for personaje in personajes %}
+          <li>
+            {{ personaje.nombre }} - {{ personaje.serie }}
+            {% if user.is_authenticated %}
+            <a href="{% url 'editar_personaje' personaje.id %}">Editar</a>
+            <form action="{% url 'borrar_personaje' personaje.id %}" method="post">
+              {% csrf_token %}
+              <button type="submit">Eliminar</button>
+            </form>
+            {% endif %}
+          </li>
           {% endfor %}
         </ul>
-        <form action="{% url 'crear_receta' %}" method="POST">
-          {% csrf_token %} {{ recetas_form.as_p }}
-          <button type="submit" class="btn boton">Añadir Receta</button>
-        </form>
-      </div>
+        {% if user.is_authenticated %}
+        <a href="{% url 'crear_personaje' %}"><button>Crear Nuevo Personaje</button></a>
+        {% endif %}
+        
     </main>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

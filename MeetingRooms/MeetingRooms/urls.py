@@ -2,7 +2,6 @@
 from django.contrib import admin
 from django.urls import path
 from bookings import views
-from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -10,10 +9,11 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
+    path('crear_personaje/', views.crear_personaje, name='crear_personaje'),
     path('busqueda.html', views.buscar, name='buscar'),
-    path('crear_receta/', views.crear_receta, name='crear_receta'),
-    path('editar/<int:receta_id>/', views.editar_receta, name='editar_receta'),
-    path('borrar/<int:borrar_id>/', views.borrar_receta, name='borrar_receta'),
-    path('', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('editar_personaje/<int:personaje_id>/', views.editar_personaje, name='editar_personaje'),
+    path('borrar_personaje/<int:personaje_id>/', views.borrar_personaje, name='borrar_personaje'),
+    #path('crear_usuario/', user_creation_view, name='crear-usuario'),
+    path('login/', views.custom_login, name='login'),
+    path('logout/', views.custom_logout, name='logout'),
+] 

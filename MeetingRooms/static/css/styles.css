@@ -34,7 +34,7 @@ html {
   
 }
 
-.cocina {
+.blog-personajes {
   display: grid;
   justify-content: center;
   background-color: #222;
@@ -87,8 +87,40 @@ a{
   justify-content: center;
 }
 
-.hat{
-    width: 4vw;
-    height: 8vh;
-    margin-right: 2rem;
+
+
+
+
+.editar_personaje {
+    display: flex;
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
+  
+  }
+
+
+.editar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #222;
+  color: #fff;
+  font-size: 2.5rem;
+  margin-top: 1rem;
+}
+
+.custom-form {
+  display: flex;
+  flex-direction: column; 
+  background-color: #111;
+  color: #ffffff;
+  padding: 1rem;
+  align-items: center; 
+}
+
+.custom-form .form-control {
+  background-color: #222;
+  color: #ffffff;
+  margin-bottom: 1rem; 
 }
