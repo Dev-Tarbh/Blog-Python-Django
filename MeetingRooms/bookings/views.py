@@ -9,8 +9,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import UpdateView
 from django.urls import reverse_lazy
 
-
-
 def index(request):
     personaje = Personajes.objects.all()
     return render(request, 'bookings/index.html', {'personajes': personaje})
@@ -79,18 +77,6 @@ def custom_login(request):
 def custom_logout(request):
     logout(request)
     return redirect('login')
-
-#def crear_usuario(request):
-    #if request.method == "GET":
-     #   form = UserCreationForm()
-    #if request.method == "POST":
-        #form = UserCreationForm(request.POST)
-        #if form.is_valid():
-         #   user = form.save()
-        #    login(request, user)
-       #     return redirect("index")
-
-   # return render(request, "bookings/crear_usuario.html", {"form": form})
 
 def crear_usuario(request):
     if request.method == "POST":
