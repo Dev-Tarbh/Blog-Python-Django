@@ -1,9 +1,15 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Personajes
-from .forms import PersonajesForm
+from .forms import PersonajesForm, UserEditForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import UpdateView
+from django.urls import reverse_lazy
+
+
 
 def index(request):
     personaje = Personajes.objects.all()
@@ -102,3 +108,12 @@ def crear_usuario(request):
 def ver_descripcion(request, personaje_id):
     personaje = Personajes.objects.get(id=personaje_id)
     return render(request, 'bookings/descripcion.html', {'personaje': personaje})
+
+class UserEditView(LoginRequiredMixin, UpdateView):
+    model = User
+    form_class = UserEditForm
+    template_name = 'bookings/editar_usuario.html'
+    success_url = reverse_lazy('index')
+
+    def get_object(self):
+        return self.request.user

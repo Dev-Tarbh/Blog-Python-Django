@@ -4,6 +4,8 @@ from django.urls import path
 from bookings import views
 from django.conf import settings
 from django.conf.urls.static import static
+from bookings.views import UserEditView
+
 
 
 urlpatterns = [
@@ -17,4 +19,5 @@ urlpatterns = [
     path('login/', views.custom_login, name='login'),
     path('logout/', views.custom_logout, name='logout'),
     path('descripcion/<int:personaje_id>/', views.ver_descripcion, name='descripcion'),
+    path('editar_perfil/', UserEditView.as_view(), name='editar_perfil'),
 ] 

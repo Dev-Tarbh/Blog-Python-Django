@@ -1,5 +1,6 @@
 from django import forms
 from .models import Personajes
+from django.contrib.auth.models import User
 
 class PersonajesForm(forms.ModelForm):
     class Meta:
@@ -13,4 +14,7 @@ class PersonajesForm(forms.ModelForm):
 
 
 
-    
+class UserEditForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'first_name', 'last_name', 'email']
