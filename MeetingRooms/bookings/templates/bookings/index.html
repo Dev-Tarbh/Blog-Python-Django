@@ -89,11 +89,15 @@
 
       <div>
         <h2 class="index">Personajes</h2>
-        <ul>
+        <section>
             {% for personaje in personajes %}
-            <li>
-                {{ personaje.nombre }} - {{ personaje.serie }}
-              
+            <div>
+              <div class="presentacion">
+                 {{ personaje.serie }}
+                 <br>
+                 {{ personaje.nombre }}
+              </div>
+               
                 {% if user.is_authenticated %}
                 <form action="{% url 'descripcion' personaje_id=personaje.id %}" method="post" >
                   {% csrf_token %}
@@ -116,9 +120,9 @@
                     </div>
                 </form>
                 {% endif %}
-            </li>
+            </div>
             {% endfor %}
-        </ul>
+        </section>
        
         {% if user.is_authenticated %}
         <form action="{% url 'crear_personaje' %}" method="post" >
