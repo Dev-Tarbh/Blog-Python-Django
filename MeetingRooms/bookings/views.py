@@ -1,18 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Personajes, Fecha
 from .forms import PersonajesForm
-from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
-
-
 
 def index(request):
     personaje = Personajes.objects.all()
     return render(request, 'bookings/index.html', {'personajes': personaje})
-
 
 @login_required
 def crear_personaje(request):
@@ -47,7 +42,6 @@ def borrar_personaje(request, personaje_id):
         return redirect('index')  
     return render(request, 'bookings/index.html', {'personaje': personaje})
 
-
 def buscar(request):
     query = request.GET.get('query')
     if query:
@@ -76,8 +70,22 @@ def custom_login(request):
 
     return render(request, 'bookings/login.html', {'form': form})
 
-
-
 def custom_logout(request):
     logout(request)
     return redirect('login')
+
+def crear_usuario(request):
+    if request.method == "GET":
+        form = UserCreationForm()
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect("home")
+
+    return render(request, "bookings/crear_usuario.html", {"form": form})
+
+def ver_descripcion(request, personaje_id):
+    personaje = Personajes.objects.get(id=personaje_id)
+    return render(request, 'bookings/descripcion.html', {'personaje': personaje})

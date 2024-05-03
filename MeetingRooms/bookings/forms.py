@@ -8,7 +8,7 @@ class PersonajesForm(forms.ModelForm):
         widgets = {
             'nombre': forms.TextInput(attrs={'class': 'form-control'}),
             'serie': forms.TextInput(attrs={'class': 'form-control'}),
-            'descripcion': forms.Textarea(attrs={'class': 'form-control', 'rows': 4}),
+            'descripcion': forms.Textarea(attrs={'class': 'form-control', 'rows': 4})
         }
 
 

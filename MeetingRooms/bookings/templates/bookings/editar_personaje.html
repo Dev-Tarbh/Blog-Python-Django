@@ -18,7 +18,7 @@
 </head>
 <body class="blog-personajes">
   <main>
-    <div class="recetas">
+    <div class="personajes">
       <nav class="navbar navbar-expand-lg bg-body-tertiary nav-blog">
         <div class="container-fluid">
           <button
@@ -36,7 +36,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
                 <a class="nav-link active link" aria-current="page" href="{% url 'index' %}"
-                  >inicio</a
+                  >Inicio</a
                 >
               </li>
             </ul>
@@ -56,9 +56,13 @@
                 Buscar
               </button>
             </form>
-            <form action="{% url 'login' %}" method="get">
-              <button type="submit" class="btn btn-primary">Login</button>
-            </form>
+            {% if user.is_authenticated %}
+            <p>  <a class="link2">{{ user.username }} </a>  <a href="{% url 'logout' %}"><i class="bi bi-person-check-fill login">Logout</i></a></p>
+            {% else %}
+            <ul>
+                <p><a href="{% url 'login' %}"><i class="bi bi-person-fill login">Login</i></a></p>
+            </ul>
+            {% endif %}
           </div>
         </div>
       </nav>
@@ -71,5 +75,10 @@
         <button type="submit" class="btn editar">Guardar</button>
     </form>  
   </div>  
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
