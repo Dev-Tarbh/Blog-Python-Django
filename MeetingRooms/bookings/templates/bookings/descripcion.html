@@ -71,17 +71,19 @@
           </div>
         </nav>
       </div>
-      <div>
-        <h1 class="blog">  <p>{{ form.serie.value }}</p></h1>
+      <div class="card">
+      <div class="descripcion">
+        <h1 class="blog">{{ personaje.serie }}</h1>
         <ul>
-            <h3>Nombre del Personaje:</h3>
-            <p>{{ form.nombre.value }}</p>  
+           <h3>Nombre del Personaje:</h3>
+            <p>{{ personaje.nombre }}</p>  
             <h3>Descripción:</h3>
-            <p>{{ form.descripcion.value }}</p>
-        </ul>
-      </div>
+            <p>{{ personaje.descripcion }}</p>
+        </ul> 
+    </div> 
+    </div>
+
     </main>
-    
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

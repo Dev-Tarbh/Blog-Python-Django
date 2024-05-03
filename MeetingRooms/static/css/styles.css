@@ -87,9 +87,7 @@ html {
   padding: 1rem 1rem;
   font-size: 1.2rem;
   margin: 0 1rem;
-  
 }
-
 
 .link,
 a{
@@ -108,9 +106,7 @@ a{
     display: flex;
     justify-content: center; 
     align-items: center; 
-  
   }
-
 
 .editar {
   display: flex;
@@ -153,7 +149,7 @@ a:hover {
  flex-wrap: wrap;
  justify-content: center;
  align-items: center;
-  margin-top: 2rem;
+ margin-top: 2rem;
   
  }
 
@@ -170,5 +166,24 @@ a:hover {
   display: flex;
   justify-content: center; 
   align-items: center; 
-  
+}
+
+
+.descripcion{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #111;
+  color: #ffffff;
+  padding: 1rem;
+  align-items: center; 
+  margin: 2rem 0;
+  width: 30vw;
+}
+
+.card{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #222;
 }
