@@ -14,125 +14,132 @@
       type="text/css"
       href="{% static 'css/styles.css' %}"
     />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
   </head>
   <body class="blog-personajes">
-    <main>
-      <div class="personajes">
-        <nav class="navbar navbar-expand-lg bg-body-tertiary nav-blog">
-          <div class="container-fluid">
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
+    <main class="main">
+      <nav class="navbar navbar-expand-lg bg-body-tertiary nav-blog">
+        <div class="container-fluid">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a
+                  class="nav-link active link"
+                  aria-current="page"
+                  href="{% url 'index' %}"
+                  >Inicio</a
+                >
+              </li>
+            </ul>
+            <form
+              class="buscar form-inline my-2 my-lg-0"
+              action="{% url 'buscar' %}"
+              method="GET"
             >
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                  <a
-                    class="nav-link active link"
-                    aria-current="page"
-                    href="{% url 'index' %}"
-                    >Inicio</a
-                  >
-                </li>
-              </ul>
-
-              <form
-                class="buscar form-inline my-2 my-lg-0"
-                action="{% url 'buscar' %}"
-                method="GET"
-              >
-                <input
-                  type="text"
-                  name="query"
-                  class="form-control me-2"
-                  placeholder="Buscar"
-                  aria-label="Buscar"
-                />
-                <button class="btn btn-outline-success" type="submit">
-                  Buscar
-                </button>
-              </form>
-
-              {% if user.is_authenticated %}
-              <div>
-                <a href="{% url 'editar_perfil' %}" class="link2">{{ user.username }}</a>
-              </div>
-              {% endif %}
-
-              {% if user.is_authenticated %}
-              <p>  <a href="{% url 'logout' %}"><i class="bi bi-person-check-fill login">Logout</i></a></p>
-              {% else %}
-              <ul>
-                  <p><a href="{% url 'login' %}"><i class="bi bi-person-fill login">Login</i></a></p>
-              </ul>
-              <form action="{% url 'crear_usuario' %}" method="post">
-                {% csrf_token %}
-                <button type="submit" class="signup"><i class="bi bi-box-arrow-in-right"></i> Sign Up</button>       
-            </form>            
-              {% endif %}
-            
-            </div>
-          </div>
-        </nav>
-      </div>
-      <div>
-        <h1 class="blog">Blog de Personajes</h1>
-      </div>
-
-      <div>
-        <h2 class="index">Personajes</h2>
-        <section>
-            {% for personaje in personajes %}
+              <input
+                type="text"
+                name="query"
+                class="form-control me-2"
+                placeholder="Buscar"
+                aria-label="Buscar"
+              />
+              <button class="btn btn-outline-success" type="submit">
+                Buscar
+              </button>
+            </form>
+            {% if user.is_authenticated %}
             <div>
-              <div class="presentacion">
-                 {{ personaje.serie }}
-                 <br>
-                 {{ personaje.nombre }}
-              </div>
-               
-                {% if user.is_authenticated %}
-                <form action="{% url 'descripcion' personaje_id=personaje.id %}" method="post" >
-                  {% csrf_token %}
-                  <div class="button-control">
-                      <button type="submit" class="button">Ver</button>
-                  </div>
-              </form>
-
-
-                <form action="{% url 'editar_personaje' personaje.id %}" method="post" >
-                    {% csrf_token %}
-                    <div class="button-control2">
-                    <button type="submit" class="button">Editar</button>
-                     </div>
-                </form>
-                <form action="{% url 'borrar_personaje' personaje.id %}" method="post" >
-                    {% csrf_token %}
-                    <div class="button-control2">
-                    <button type="submit" class="button">Eliminar</button>
-                    </div>
-                </form>
-                {% endif %}
+              <a href="{% url 'editar_perfil' %}" class="link2"
+                >{{ user.username }}</a
+              >
             </div>
-            {% endfor %}
-        </section>
-       
-        {% if user.is_authenticated %}
-        <form action="{% url 'crear_personaje' %}" method="post" >
-          {% csrf_token %}
-          <div class="button-control">
+            {% endif %} {% if user.is_authenticated %}
+            <p>
+              <a href="{% url 'logout' %}"
+                ><i class="bi bi-person-check-fill login">Logout</i></a
+              >
+            </p>
+            {% else %}
+            <ul>
+              <p>
+                <a href="{% url 'login' %}"
+                  ><i class="bi bi-person-fill login">Login</i></a
+                >
+              </p>
+            </ul>
+            <form action="{% url 'crear_usuario' %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="signup">
+                <i class="bi bi-box-arrow-in-right"></i> Sign Up
+              </button>
+            </form>
+            {% endif %}
+          </div>
+        </div>
+      </nav>
+<h1 class="blog">Personajes</h1>
+      <section class="center">
+        {% for personaje in personajes %}
+        <div class="card mb-3 personaje-card">
+          <div class="card-header color-card">{{ personaje.serie }}</div>
+          <div class="card-body">
+            <h5 class="card-title color-card">{{ personaje.nombre }}</h5>
+          </div>
+          {% if user.is_authenticated %}
+          <form
+            action="{% url 'descripcion' personaje_id=personaje.id %}"
+            method="post"
+          >
+            {% csrf_token %}
+            <div>
+              <button type="submit" class="button-control">Ver</button>
+            </div>
+          </form>
+          {% endif %}
+        </div>
+          <form
+            action="{% url 'editar_personaje' personaje.id %}"
+            method="post"
+          >
+            {% csrf_token %}
+            <div class="button-control2 editar_borrar">
+              <button type="submit" class="button">Editar</button>
+            </div>
+          </form>
+
+          <form
+            action="{% url 'borrar_personaje' personaje.id %}"
+            method="post"
+          >
+            {% csrf_token %}
+            <div class="button-control2 editar_borrar">
+              <button type="submit" class="button">Eliminar</button>
+            </div>
+          </form>
+        {% endfor %} {% if user.is_authenticated %}
+      </section>
+
+      <form action="{% url 'crear_personaje' %}" method="post">
+        {% csrf_token %}
+        <div class="pj">
           <button type="submit" class="button-crear">Crear Personaje</button>
-              </div>
-        </form>
-        {% endif %}
-        
+        </div>
+      </form>
+      {% endif %}
     </main>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

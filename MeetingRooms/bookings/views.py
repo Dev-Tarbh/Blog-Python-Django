@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Personajes
-from .forms import PersonajesForm, UserEditForm
+from .models import Personajes, Avatar
+from .forms import PersonajesForm, UserEditForm, AvatarCreateForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -103,3 +103,19 @@ class UserEditView(LoginRequiredMixin, UpdateView):
 
     def get_object(self):
         return self.request.user
+    
+
+def avatar_view(request):
+        if request.method == "GET":
+            contexto = {"form": AvatarCreateForm()}
+        else:
+           form = AvatarCreateForm(request.POST, request.FILES)
+           if form.is_valid():
+               image = form.cleaned_data["image"]
+               nuevo_avatar = Avatar(image=image, user=request.user)
+               nuevo_avatar.save()
+               return redirect('index')
+           else:
+               contexto = {"form": form}
+
+        return render(request, "bookings/avatar_create.html", context=contexto)
