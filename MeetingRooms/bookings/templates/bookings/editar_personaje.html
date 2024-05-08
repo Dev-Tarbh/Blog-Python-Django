@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Crear Personaje</title>
+    <title>Editar Personaje</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {% load static %}
@@ -36,8 +36,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
                 <a class="nav-link active link" aria-current="page" href="{% url 'index' %}"
-                  >Inicio</a
-                >
+                  >Inicio</a>
               </li>
             </ul>
             <form
@@ -57,7 +56,11 @@
               </button>
             </form>
             {% if user.is_authenticated %}
-            <p>  <a class="link2">{{ user.username }} </a>  <a href="{% url 'logout' %}"><i class="bi bi-person-check-fill login">Logout</i></a></p>
+            <div class="avatar-control">
+               <p>  <a class="link2">{{ user.username }} </a> </p>
+                   <img class="avatar"  src="{{ user.avatar.image.url }}" />
+            </div>
+             <p><a href="{% url 'logout' %}"><i class="bi bi-person-check-fill login">Logout</i></a></p>
             {% else %}
             <ul>
                 <p><a href="{% url 'login' %}"><i class="bi bi-person-fill login">Login</i></a></p>

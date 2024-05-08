@@ -57,7 +57,11 @@
               </button>
             </form>
             {% if user.is_authenticated %}
-            <p>  <a class="link2">{{ user.username }} </a>  <a href="{% url 'logout' %}"><i class="bi bi-person-check-fill login">Logout</i></a></p>
+             <div class="avatar-control">
+              <p>  <a class="link2">{{ user.username }} </a> </p>
+              <img class="avatar"  src="{{ user.avatar.image.url }}" />
+             </div>
+               <a href="{% url 'logout' %}"><i class="bi bi-person-check-fill login">Logout</i></a>
             {% else %}
             <ul>
                 <p><a href="{% url 'login' %}"><i class="bi bi-person-fill login">Login</i></a></p>

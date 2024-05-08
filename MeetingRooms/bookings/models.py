@@ -8,7 +8,6 @@ class Fecha(models.Model):
     descripcion = models.TextField()
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     
-
     class Meta:
         verbose_name = "Fecha"
         verbose_name_plural = "Fechas"
@@ -29,4 +28,4 @@ class Avatar(models.Model):
         
     def __str__(self):
         return f"Avatar for {self.user.username}"
-    pass
+    

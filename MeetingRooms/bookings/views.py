@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import UpdateView
 from django.urls import reverse_lazy
+from django.contrib.auth import get_user_model
 
 def index(request):
     personaje = Personajes.objects.all()
@@ -117,5 +118,5 @@ def avatar_view(request):
                return redirect('index')
            else:
                contexto = {"form": form}
-
         return render(request, "bookings/avatar_create.html", context=contexto)
+

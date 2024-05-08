@@ -45,7 +45,7 @@ html {
   color: #fff;
   padding: 1rem;
   background-image: url('/static/img/estrellas.jpg');
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   background-size: cover;
   
 }
@@ -121,7 +121,7 @@ a{
   justify-content: center;
   align-items: center;
   text-align: center;
-  background-color: #222;
+  margin-bottom: 1rem;
   color: #fff;
   font-size: 2.5rem;
   margin-top: 1rem;
@@ -179,7 +179,7 @@ a:hover {
   flex-direction: column;
   text-align: center;
   justify-content: center;
-  background-color: #222;
+  background-color: #111;
   color: #ffffff;
   padding: 1rem;
   align-items: center; 
@@ -191,7 +191,7 @@ a:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #222;
+  background-color: #111;
   padding: 0;
 }
 
@@ -221,11 +221,7 @@ a:hover {
   margin: 1rem;
 }
 
-.editar_borrar{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+
 
 .button-control{
   display: flex;
@@ -238,13 +234,20 @@ a:hover {
   width: 8rem;
 }
 
+.editar_borrar {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  justify-content: center;
+}
 
-.button-control2{
+.button-control2 {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   justify-content: center;
   border-radius: 5.5rem;
+  margin-top: 1rem; 
 }
 
 .button-crear {
@@ -272,14 +275,30 @@ a:hover {
   
 }
 
+.iniciar-sesion{
+  display: flex;
+  color: #fff;
+  justify-content: center;
+  align-items: center;
+  background-color: #222;
+}
+
+.div-login{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .personaje-card{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   text-align: center;
   align-items: center;
-  background-color: #222;
+  background-color: #111;
   width: 20rem;
+  padding: 1rem;
+  margin: 0 1rem;
  
 }
 
@@ -310,4 +329,17 @@ a:hover {
 .main{
   justify-content: center;
   align-items: center;
+}
+
+
+.avatar-control{
+  display: flex;
+}
+
+.avatar{
+  display: flex;
+  flex-wrap: wrap;
+  width: 5.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
 }

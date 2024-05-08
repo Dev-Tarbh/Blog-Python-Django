@@ -62,12 +62,15 @@
               </button>
             </form>
             {% if user.is_authenticated %}
-            <div>
+              <div class="avatar-control">
               <a href="{% url 'editar_perfil' %}" class="link2"
-                >{{ user.username }}</a
-              >
+                >{{ user.username }}</a>
+                   <img class="avatar"  src="{{ user.avatar.image.url }}"  />
             </div>
-            {% endif %} {% if user.is_authenticated %}
+           
+
+            {% endif %}
+             {% if user.is_authenticated %}
             <p>
               <a href="{% url 'logout' %}"
                 ><i class="bi bi-person-check-fill login">Logout</i></a
@@ -91,7 +94,7 @@
           </div>
         </div>
       </nav>
-<h1 class="blog">Personajes</h1>
+      <h1 class="blog">Personajes</h1>
       <section class="center">
         {% for personaje in personajes %}
         <div class="card mb-3 personaje-card">
@@ -99,7 +102,7 @@
           <div class="card-body">
             <h5 class="card-title color-card">{{ personaje.nombre }}</h5>
           </div>
-          {% if user.is_authenticated %}
+
           <form
             action="{% url 'descripcion' personaje_id=personaje.id %}"
             method="post"
@@ -109,8 +112,8 @@
               <button type="submit" class="button-control">Ver</button>
             </div>
           </form>
-          {% endif %}
-        </div>
+          </div>
+          {% if user.is_authenticated %}
           <form
             action="{% url 'editar_personaje' personaje.id %}"
             method="post"
@@ -125,12 +128,16 @@
             action="{% url 'borrar_personaje' personaje.id %}"
             method="post"
           >
-            {% csrf_token %}
+           
             <div class="button-control2 editar_borrar">
               <button type="submit" class="button">Eliminar</button>
             </div>
           </form>
-        {% endfor %} {% if user.is_authenticated %}
+        
+        {% endif %}
+
+         {% endfor %} 
+         {% if user.is_authenticated %}
       </section>
 
       <form action="{% url 'crear_personaje' %}" method="post">

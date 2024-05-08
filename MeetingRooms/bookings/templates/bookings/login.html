@@ -69,16 +69,18 @@
                       <div>{{ message }}</div>
                   {% endfor %}
               {% endif %}
-              <form method="post">
+              <div class="div-login">
+                 <form method="post">
                   {% csrf_token %}
                   <label for="username">Nombre de usuario:</label><br>
                   <input type="text" id="username" name="username"><br>
                   <label for="password">Contraseña:</label><br>
                   <input type="password" id="password" name="password"><br><br>
-                  <button type="submit">Iniciar sesión</button>
-                  <div>
+                  <button type="submit" class="iniciar-sesion">Iniciar sesión</button>
               </form>    
-            </div>
+              </div>
+             
+           
               </main>
               <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
               <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
