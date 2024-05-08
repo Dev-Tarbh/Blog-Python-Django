@@ -65,13 +65,13 @@
               </form>
               {% if user.is_authenticated %}
               <div class="avatar-control">
-                  <p> <a class="link2">{{ user.username }} </a>  </p>
-                  <img class="avatar"  src="{{ user.avatar.image.url }}"  />
+                <p><a class="link2">{{ user.username }} </a></p>
+                <img class="avatar" src="{{ user.avatar.image.url }}" />
               </div>
-                <a href="{% url 'logout' %}"
-                  ><i class="bi bi-person-check-fill login">Logout</i></a
-                >
-            
+              <a href="{% url 'logout' %}"
+                ><i class="bi bi-person-check-fill login">Logout</i></a
+              >
+
               {% else %}
               <ul>
                 <p>
@@ -89,11 +89,13 @@
       <h2>Editar perfil</h2>
       <form method="post">
         {% csrf_token %} {{ form.as_p }}
-        <button type="submit">Guardar cambios</button>
+        <div class="div-editar">
+          <button type="submit" class="button-control2">Guardar cambios</button>
+        </div>
       </form>
       <form method="post" enctype="multipart/form-data">
         <a href="{% url 'avatar_add' %}">Cambiar Avatar</a>
-    </form>
+      </form>
       {% endif %}
     </main>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

@@ -22,3 +22,4 @@ class AvatarCreateForm(forms.ModelForm):
     class Meta:
         model = Avatar
         fields = ['image']
+   

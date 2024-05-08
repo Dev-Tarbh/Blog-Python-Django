@@ -9,6 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import UpdateView
 from django.urls import reverse_lazy
 from django.contrib.auth import get_user_model
+import logging
 
 def index(request):
     personaje = Personajes.objects.all()
@@ -108,15 +109,19 @@ class UserEditView(LoginRequiredMixin, UpdateView):
 
 def avatar_view(request):
         if request.method == "GET":
-            contexto = {"form": AvatarCreateForm()}
+           contexto = {"form": AvatarCreateForm()}
         else:
            form = AvatarCreateForm(request.POST, request.FILES)
            if form.is_valid():
-               image = form.cleaned_data["image"]
-               nuevo_avatar = Avatar(image=image, user=request.user)
-               nuevo_avatar.save()
-               return redirect('index')
+                image = form.cleaned_data["image"]
+                avatar_existente = Avatar.objects.filter(user=request.user)
+                avatar_existente.delete()
+                nuevo_avatar = Avatar(image=image, user=request.user)
+                nuevo_avatar.save()
+                return redirect('index')
            else:
                contexto = {"form": form}
         return render(request, "bookings/avatar_create.html", context=contexto)
+
+logger = logging.getLogger(__name__)
 
